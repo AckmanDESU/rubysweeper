@@ -34,7 +34,7 @@ class Tile
     @hidden = false
 
     if !@mine && buddy_count == 0
-      @neighbors.each {|n| n.reveal}
+      @neighbors.select(&:hidden?).each {|n| n.reveal}
     end
 
     @mine
@@ -57,7 +57,4 @@ class Tile
       "[ ]"
     end
   end
-end
-
-if __FILE__ == $PROGRAM_NAME
 end
