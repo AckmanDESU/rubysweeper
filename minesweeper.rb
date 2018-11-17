@@ -8,10 +8,11 @@ class Minesweeper
   end
 
   def game_over?
-    false
+    @board.over?
   end
 
   def get_player_input
+    sleep 1
     ["r", [0, 0]]
   end
 
@@ -29,4 +30,9 @@ class Minesweeper
       end
     end
   end
+end
+
+if __FILE__ == $PROGRAM_NAME
+  game = Minesweeper.new(10, 3)
+  game.play
 end

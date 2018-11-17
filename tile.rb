@@ -36,6 +36,8 @@ class Tile
     if !@mine && buddy_count == 0
       @neighbors.each {|n| n.reveal}
     end
+
+    @mine
   end
 
   def inspect

@@ -2,7 +2,7 @@ require 'awesome_print'
 require_relative './tile'
 
 class Board
-  attr_accessor :grid
+  attr_accessor :grid, :over
 
   # @param difficulty [Integer] 1..10
   def initialize(size, difficulty)
@@ -10,6 +10,7 @@ class Board
       throw "Wrong difficulty level"
     end
 
+    @over = false
     @difficulty = difficulty
     @grid = Array.new(size) {Array.new}
 
@@ -26,6 +27,10 @@ class Board
     @grid[row][col] = value
   end
 
+  def over?
+    @over
+  end
+
   def render
     system "clear" or system "cls"
 
@@ -37,7 +42,7 @@ class Board
 
   def reveal(pos)
     tile = self[pos]
-    tile.reveal
+    @over = tile.reveal
 
     tile
   end
