@@ -1,7 +1,7 @@
 require_relative './board'
 
 class Tile
-  attr_reader :pos, :value, :hidden, :mine
+  attr_reader :pos, :hidden, :mine
 
   def initialize(board, pos, mine)
     @board = board
@@ -16,9 +16,14 @@ class Tile
     neighbors = []
     x, y = @pos
 
-    surroundings = [[x-1, y-1], [x, y-1], [x+1, y-1], [x-1, y], [x+1, y], [x-1, y+1], [x, y+1], [x+1, y+1]]
+    surroundings = [
+      [x-1, y-1], [x, y-1], [x+1, y-1],
+      [x-1, y], [x+1, y],
+      [x-1, y+1], [x, y+1], [x+1, y+1]
+    ]
+
     surroundings
-      .select {|pos| pos.all? {|num| num >= 0}}
+      .select { |pos| pos.all? { |num| num >= 0 } }
       .each do |pos|
       neighbor = @board[pos]
       neighbors << neighbor unless neighbor.nil?
