@@ -32,7 +32,7 @@ class Board
   end
 
   def render
-    system "clear" or system "cls"
+    # system "clear" or system "cls"
 
     puts "   " + (0...@grid.size).to_a.join("  ")
     @grid.each_with_index do |row, idx|

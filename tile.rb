@@ -48,13 +48,13 @@ class Tile
 
   def to_s
     if hidden?
-      "[#]"
+      "[_]"
     elsif mine
       "[*]"
     elsif buddy_count > 0
       "[#{buddy_count}]"
     else
-      "[ ]"
+      "   "
     end
   end
 end

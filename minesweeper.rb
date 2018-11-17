@@ -12,8 +12,11 @@ class Minesweeper
   end
 
   def get_player_input
-    sleep 1
-    ["r", [0, 0]]
+    puts "(r)eveal or (f)lag a position: r|f,row,col - ex: r,5,3"
+    input = gets.chomp.split(",")
+    mode = input.shift
+    pos = input.map(&:to_i)
+    [mode, pos]
   end
 
   def play
@@ -21,6 +24,9 @@ class Minesweeper
       @board.render
 
       mode, pos = get_player_input
+
+      puts "mode:  #{mode}"
+      puts "pos:  #{pos}"
 
       if mode == "r"
         @board.reveal(pos)
