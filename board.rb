@@ -47,6 +47,10 @@ class Board
     tile
   end
 
+  def flag(pos)
+    self[pos].flag
+  end
+
   def fill_board(size)
     ratio = mine_percentage
     mines = 0

@@ -57,11 +57,10 @@ class Minesweeper
       puts "mode:  #{mode}"
       puts "pos:  #{pos}"
 
-      if mode == "r"
-        @board.reveal(pos)
+      if mode == "f"
+        @board.flag(pos)
       else # mode == "f"
         @board.reveal(pos)
-        # @board.flag(pos)
       end
     end
   end

@@ -8,6 +8,7 @@ class Tile
     @pos = pos
     @mine = mine
     @hidden = true
+    @flagged = false
   end
 
   # @return [Array<Tile>]
@@ -31,6 +32,8 @@ class Tile
   end
 
   def reveal
+    return false if @flagged
+
     @hidden = false
 
     if !@mine && buddy_count == 0
@@ -40,6 +43,11 @@ class Tile
     @mine
   end
 
+  def flag
+    return false unless @hidden
+    @flagged = true
+  end
+
   def inspect
     "Pos: #{pos} - Value: #{self.to_s}"
   end
@@ -47,7 +55,9 @@ class Tile
   alias_method :hidden?, :hidden
 
   def to_s
-    if hidden?
+    if @flagged
+      "[F]"
+    elsif hidden?
       "[_]"
     elsif mine
       "[*]"
