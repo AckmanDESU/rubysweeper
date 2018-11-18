@@ -11,6 +11,7 @@ class Tile
     @flagged = false
   end
 
+  # TODO: Differenciate diagonal neighbors from direct ones when revealing
   # @return [Array<Tile>]
   def get_neighbors
     neighbors = []
@@ -50,7 +51,7 @@ class Tile
 
   def flag
     return false unless @hidden
-    @flagged = true
+    @flagged = !@flagged
   end
 
   def inspect

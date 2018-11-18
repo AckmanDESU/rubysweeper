@@ -32,7 +32,9 @@ class Board
   end
 
   def render
-    # system "clear" or system "cls"
+    system "clear" or system "cls"
+
+    puts "Mines: #{@mines}"
 
     puts "   " + (0...@grid.size).to_a.join("  ")
     @grid.each_with_index do |row, idx|
@@ -65,7 +67,7 @@ class Board
 
     @grid.each {|row| row.each {|tile| tile.get_neighbors}}
 
-    p "Mines: #{mines}"
+    @mines = mines
   end
 
   def mine_percentage

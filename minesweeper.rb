@@ -48,9 +48,9 @@ class Minesweeper
   end
 
   def play
-    until game_over?
-      @board.render
+    @board.render
 
+    until game_over?
       *pos, mode = get_player_input
       pos.map!(&:to_i)
 
@@ -62,6 +62,8 @@ class Minesweeper
       else # mode == "f"
         @board.reveal(pos)
       end
+
+      @board.render
     end
   end
 end
