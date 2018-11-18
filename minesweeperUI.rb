@@ -49,7 +49,7 @@ class MineUI < Minesweeper
       :right => ->{ move_to([0,1]) },
       :up => ->{ move_to([-1,0]) },
       :down => ->{ move_to([1,0]) },
-      :control_m => -> { @board.reveal(@selected) },
+      :r => -> { @board.reveal(@selected) },
       :f => -> { @board.flag(@selected) }
     }
 
