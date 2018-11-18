@@ -18,6 +18,8 @@ class Minesweeper
       return false
     end
 
+    return false if pos.any? { |n| n < 0 }
+
     !@board[pos].nil?
   end
 
