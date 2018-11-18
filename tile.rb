@@ -1,3 +1,4 @@
+require 'colorize'
 require_relative './board'
 
 class Tile
@@ -71,11 +72,11 @@ class Tile
 
   def to_s
     if @flagged
-      "[F]"
+      "[F]".yellow
     elsif hidden?
       "[_]"
     elsif mine
-      "[*]"
+      "[*]".red
     elsif buddy_count > 0
       "[#{buddy_count}]"
     else
