@@ -84,13 +84,13 @@ class Tile
     if @flagged
       "[F]".yellow
     elsif hidden?
-      "[_]"
+      "[_]".colorize(:color => :black, :background => :white)
     elsif mine
       "[*]".red
     elsif buddy_count > 0
       "[#{buddy_count}]".colorize(buddy_color)
     else
-      "   ".colorize(:background => :white)
+      "   "
     end
   end
 end
