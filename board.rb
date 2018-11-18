@@ -2,7 +2,7 @@ require 'awesome_print'
 require_relative './tile'
 
 class Board
-  attr_accessor :grid, :over
+  attr_accessor :grid, :over, :mines
 
   # @param difficulty [Integer] 1..10
   def initialize(size, difficulty)
