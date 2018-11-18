@@ -36,9 +36,10 @@ class Board
 
     puts "Mines: #{@mines}"
 
-    puts "   " + (0...@grid.size).to_a.join("  ")
+    puts "     " + (0...@grid.size).to_a.join("  ")
+    puts "    " + "---" * @grid.size
     @grid.each_with_index do |row, idx|
-      puts "#{idx} #{row.join("")}"
+      puts "#{idx} | #{row.join("")}"
     end
   end
 
