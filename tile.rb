@@ -90,7 +90,7 @@ class Tile
     elsif buddy_count > 0
       "[#{buddy_count}]".colorize(buddy_color)
     else
-      "   "
+      "   ".colorize(:background => :white)
     end
   end
 end
