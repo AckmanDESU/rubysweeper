@@ -2,7 +2,7 @@ require 'colorize'
 require_relative './board'
 
 class Tile
-  attr_reader :pos, :hidden, :mine
+  attr_reader :pos, :hidden, :mine, :flagged
 
   def initialize(board, pos, mine)
     @board = board
@@ -38,6 +38,10 @@ class Tile
     @neighbors.count {|tile| tile.mine}
   end
 
+  def flag_count
+    @neighbors.count { |tile| tile.flagged }
+  end
+
   def reveal(force=false)
     if force
       @hidden = false
@@ -48,7 +52,8 @@ class Tile
 
     @hidden = false
 
-    if !@mine && buddy_count == 0
+    if !@mine && buddy_count == 0 ||
+        !@hidden && buddy_count == flag_count
       @neighbors.select(&:hidden?).each {|n| n.reveal}
     end
 
