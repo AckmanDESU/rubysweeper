@@ -37,13 +37,22 @@ class Tile
     @neighbors.count {|tile| tile.mine}
   end
 
-  def reveal
+  def reveal(force=false)
+    if force
+      @hidden = false
+      return
+    end
+
     return false if @flagged
 
     @hidden = false
 
     if !@mine && buddy_count == 0
       @neighbors.select(&:hidden?).each {|n| n.reveal}
+    end
+
+    if @mine
+      @board.trigger_all
     end
 
     @mine

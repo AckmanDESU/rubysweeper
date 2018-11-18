@@ -49,6 +49,12 @@ class Board
     tile
   end
 
+  def trigger_all
+    @grid.each do |row|
+      row.select(&:mine).each { |t| t.reveal(true) }
+    end
+  end
+
   def flag(pos)
     self[pos].flag
   end
