@@ -70,6 +70,16 @@ class Tile
 
   alias_method :hidden?, :hidden
 
+  def buddy_color
+    case buddy_count
+    when 1; :blue
+    when 2; :green
+    when 3; :red
+    when 4; :purple
+    else; :white
+    end
+  end
+
   def to_s
     if @flagged
       "[F]".yellow
@@ -78,7 +88,7 @@ class Tile
     elsif mine
       "[*]".red
     elsif buddy_count > 0
-      "[#{buddy_count}]"
+      "[#{buddy_count}]".colorize(buddy_color)
     else
       "   "
     end
