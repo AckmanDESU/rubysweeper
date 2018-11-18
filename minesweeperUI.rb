@@ -28,11 +28,11 @@ class MineUI < Minesweeper
 
     puts "Mines: #{@board.mines}"
 
-    puts "     " + (0...grid.size).to_a.join("  ")
-    puts "    " + "---" * grid.size
+    puts "   " + "---" * grid.size
     grid.each_with_index do |row, idx|
-      puts "#{idx} | #{row.join("")}"
+      puts " | #{row.join("")} |"
     end
+    puts "   " + "---" * grid.size
   end
 
   def move_to(pos)
