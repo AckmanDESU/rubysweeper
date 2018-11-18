@@ -1,11 +1,22 @@
 require_relative './board'
 require_relative './minesweeper'
+require_relative './save'
 
 require 'colorize'
 require 'remedy'
+require 'yaml'
 
 class MineUI < Minesweeper
   include Remedy
+
+
+  def save
+    File.write("save.yaml", self.to_yaml)
+  end
+
+  def self.load
+    YAML.load(File.read("save.yaml"))
+  end
 
   def initialize(*args)
     super(*args)
@@ -73,5 +84,8 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   game = MineUI.new(10, 3)
-  game.play
+  game.save
+
+  game2 = MineUI.load
+  game2.play
 end
