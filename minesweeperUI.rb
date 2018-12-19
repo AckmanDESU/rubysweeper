@@ -19,7 +19,7 @@ class MineUI < Minesweeper
   end
 
   def initialize(*args)
-    super(*args)
+    super
 
     @selected = [0,0]
   end
