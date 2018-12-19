@@ -19,9 +19,9 @@ class Tile
     x, y = @pos
 
     surroundings = [
-      [x-1, y-1], [x, y-1], [x+1, y-1],
-      [x-1, y], [x+1, y],
-      [x-1, y+1], [x, y+1], [x+1, y+1]
+      [x - 1, y - 1], [x, y - 1], [x + 1, y - 1],
+      [x - 1, y], [x + 1, y],
+      [x - 1, y + 1], [x, y + 1], [x + 1, y + 1]
     ]
 
     surroundings
@@ -35,14 +35,14 @@ class Tile
   end
 
   def buddy_count
-    @neighbors.count {|tile| tile.mine}
+    @neighbors.count(&:mine)
   end
 
   def flag_count
-    @neighbors.count { |tile| tile.flagged }
+    @neighbors.count(&:flagged)
   end
 
-  def reveal(force=false)
+  def reveal(force = false)
     if force
       @hidden = false
       return
@@ -53,49 +53,48 @@ class Tile
     @hidden = false
 
     if !@mine && buddy_count == 0 ||
-        !@hidden && buddy_count == flag_count
-      @neighbors.select(&:hidden?).each {|n| n.reveal}
+       !@hidden && buddy_count == flag_count
+      @neighbors.select(&:hidden?).each(&:reveal)
     end
 
-    if @mine
-      @board.trigger_all
-    end
+    @board.trigger_all if @mine
 
     @mine
   end
 
   def flag
     return false unless @hidden
+
     @flagged = !@flagged
   end
 
   def inspect
-    "Pos: #{pos} - Value: #{self.to_s}"
+    "Pos: #{pos} - Value: #{self}"
   end
 
-  alias_method :hidden?, :hidden
+  alias hidden? hidden
 
   def buddy_color
     case buddy_count
-    when 1; :blue
-    when 2; :green
-    when 3; :red
-    when 4; :purple
+    when 1 then :blue
+    when 2 then :green
+    when 3 then :red
+    when 4 then :purple
     else; :white
     end
   end
 
   def to_s
     if @flagged
-      "[F]".yellow
+      '[F]'.yellow
     elsif hidden?
-      "[_]".colorize(:color => :black, :background => :white)
+      '[_]'.colorize(color: :black, background: :white)
     elsif mine
-      "[*]".red
+      '[*]'.red
     elsif buddy_count > 0
       "[#{buddy_count}]".colorize(buddy_color)
     else
-      "   "
+      '   '
     end
   end
 end

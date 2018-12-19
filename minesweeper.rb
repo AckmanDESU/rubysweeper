@@ -13,8 +13,8 @@ class Minesweeper
 
   def valid_pos?(pos)
     begin
-      pos.map! {|el| Integer(el)}
-    rescue
+      pos.map! { |el| Integer(el) }
+    rescue StandardError
       return false
     end
 
@@ -24,7 +24,7 @@ class Minesweeper
   end
 
   def valid_mode?(mode)
-    ["r", "f", ""].include?(mode.downcase)
+    ['r', 'f', ''].include?(mode.downcase)
   end
 
   def valid_input?((row, col, mode))
@@ -42,7 +42,7 @@ class Minesweeper
 
     until input && valid_input?(input)
       puts "Enter a position like so: row, column - add an 'f' at the end to flag it or 'r' to reveal it"
-      print "> "
+      print '> '
       input = parse_input(gets.chomp)
     end
 
@@ -59,7 +59,7 @@ class Minesweeper
       puts "mode:  #{mode}"
       puts "pos:  #{pos}"
 
-      if mode == "f"
+      if mode == 'f'
         @board.flag(pos)
       else # mode == "f"
         @board.reveal(pos)
@@ -70,7 +70,7 @@ class Minesweeper
   end
 end
 
-if __FILE__ == $PROGRAM_NAME
+if $PROGRAM_NAME == __FILE__
   game = Minesweeper.new(10, 3)
   game.play
 end

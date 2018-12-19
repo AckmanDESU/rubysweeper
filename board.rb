@@ -6,24 +6,24 @@ class Board
 
   # @param difficulty [Integer] 1..10
   def initialize(size, difficulty)
-    unless difficulty.between? 1, 10
-      throw "Wrong difficulty level"
-    end
+    throw 'Wrong difficulty level' unless difficulty.between? 1, 10
 
     @over = false
     @difficulty = difficulty
-    @grid = Array.new(size) {Array.new}
+    @grid = Array.new(size) { [] }
 
     fill_board(size)
   end
 
   def []((row, col))
     return @grid[row] if @grid[row].nil?
+
     @grid[row][col]
   end
 
   def []=((row, col), value)
     return if @grid[row].nil?
+
     @grid[row][col] = value
   end
 
@@ -32,14 +32,14 @@ class Board
   end
 
   def render
-    system "clear" or system "cls"
+    system('clear') || system('cls')
 
     puts "Mines: #{@mines}"
 
-    puts "     " + (0...@grid.size).to_a.join("  ")
-    puts "    " + "---" * @grid.size
+    puts '     ' + (0...@grid.size).to_a.join('  ')
+    puts '    ' + '---' * @grid.size
     @grid.each_with_index do |row, idx|
-      puts "#{idx} | #{row.join("")}"
+      puts "#{idx} | #{row.join('')}"
     end
   end
 
@@ -72,7 +72,7 @@ class Board
       end
     end
 
-    @grid.each {|row| row.each {|tile| tile.get_neighbors}}
+    @grid.each { |row| row.each(&:get_neighbors) }
 
     @mines = mines
   end
@@ -82,7 +82,7 @@ class Board
   end
 end
 
-if __FILE__ == $PROGRAM_NAME
+if $PROGRAM_NAME == __FILE__
   b = Board.new(10, 3)
   b.render
 end
